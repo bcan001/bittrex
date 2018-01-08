@@ -57,7 +57,7 @@ module Bittrex
     private
 
     def signature(url, nonce)
-      OpenSSL::HMAC.hexdigest('sha512', secret, "#{url}?apikey=#{key}&nonce=#{nonce}")
+      OpenSSL::HMAC.hexdigest('sha512', secret.encode("ASCII"), "#{url}?apikey=#{key}&nonce=#{nonce}".encode("ASCII"))
     end
 
     def connection

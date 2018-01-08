@@ -5,7 +5,8 @@ module Bittrex
     attr_reader :uuid
 
     def initialize(attrs = {})
-      @uuid = attrs['uuid']
+      # @uuid = attrs['uuid']
+      @id = attrs['Uuid'].to_s
     end
 
     # parameter required  description: 
