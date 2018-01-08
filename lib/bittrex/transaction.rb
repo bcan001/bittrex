@@ -17,7 +17,7 @@ module Bittrex
     # https://bittrex.com/api/v1.1/market/buylimit?apikey=API_KEY&market=BTC-LTC&quantity=1.2&rate=1.3  
     def self.buy(market_name,order_type,quantity,rate,time_in_effect,condition_type,target)
     	# https://github.com/ericsomdahl/python-bittrex/issues/35
-      client.get('key/market/TradeBuy', {
+      client.get('key/market/tradebuy', {
       	marketname: market_name, 
       	ordertype: order_type, 
       	quantity: quantity,
