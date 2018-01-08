@@ -43,12 +43,14 @@ module Bittrex
           req.params[:nonce]    = nonce
           req.headers[:apisign] = signature(url, nonce)
         end
+
+        puts url
+        puts req
+
       end
 
-      puts url
-      puts req
       puts response.body
-      
+
       JSON.parse(response.body)['result']
     end
 
