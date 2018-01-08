@@ -53,9 +53,9 @@ module Bittrex
         if key
           # url = url.m
           params.each do |key, val|
-            new_url += key
+            new_url += key.to_s
             new_url += '='
-            new_url += val
+            new_url += val.to_s
             new_url += '&' 
           end
 
@@ -66,7 +66,7 @@ module Bittrex
           req.params[:apikey]   = key
           req.params[:nonce]    = nonce
           # req.headers[:apisign] = signature(new_url, nonce)
-          req.headers[:apisign] = signature(new_url)
+          req.headers[:apisign] = signature(new_url, nonce)
         end
 
         puts new_url
@@ -82,7 +82,7 @@ module Bittrex
 
     private
 
-    def signature(url)
+    def signature(url, nonce)
       OpenSSL::HMAC.hexdigest('sha512', secret, url)
       # OpenSSL::HMAC.hexdigest('sha512', secret.encode("ASCII"), "#{url}?apikey=#{key}&nonce=#{nonce}".encode("ASCII"))
     end
