@@ -3,7 +3,7 @@ require 'base64'
 require 'json'
 
 module Bittrex
-  class Client
+  class Client2
     HOST = 'https://bittrex.com/api/v2.0'
     # https://bittrex.com/api/v2.0/key/balance/getbalances
 

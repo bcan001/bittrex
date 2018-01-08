@@ -4,6 +4,7 @@ module Bittrex
   autoload :Helpers,       'bittrex/helpers'
   autoload :Market,        'bittrex/market'
   autoload :Client,        'bittrex/client'
+  autoload :Client2,        'bittrex/client2'
   autoload :Configuration, 'bittrex/configuration'
   autoload :Currency,      'bittrex/currency'
   autoload :Deposit,       'bittrex/deposit'
@@ -17,6 +18,10 @@ module Bittrex
 
   def self.client
     @client ||= Client.new(configuration.auth)
+  end
+
+  def self.client2
+    @client2 ||= Client2.new(configuration.auth)
   end
 
   def self.config
