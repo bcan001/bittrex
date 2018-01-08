@@ -3,16 +3,16 @@ require 'base64'
 require 'json'
 
 module Bittrex
-  class DoNotEncoder
-    def self.encode(params)
-      buffer = ''
-      params.each do |key, value|
-        buffer << "#{key}=#{value}&"
-      end
-    return buffer.chop
-    end
-  end
-  
+  # class DoNotEncoder
+  #   def self.encode(params)
+  #     buffer = ''
+  #     params.each do |key, value|
+  #       buffer << "#{key}=#{value}&"
+  #     end
+  #   return buffer.chop
+  #   end
+  # end
+
   class Client
     HOST = 'https://bittrex.com/api/v1.1'
     # https://bittrex.com/api/v2.0/key/balance/getbalances
@@ -48,13 +48,29 @@ module Bittrex
         req.params.merge!(params)
         req.url(url)
 
+        new_url = url + '?'
+
         if key
+          # url = url.m
+          params.each do |key, val|
+            new_url += key
+            new_url += '='
+            new_url += val
+            new_url += '&' 
+          end
+
+          new_url = new_url[0..-2]
+
+          new_url += "&apikey=#{key}&nonce=#{nonce}"
+
           req.params[:apikey]   = key
           req.params[:nonce]    = nonce
-          req.headers[:apisign] = signature(url, nonce)
+          # req.headers[:apisign] = signature(new_url, nonce)
+          req.headers[:apisign] = signature(new_url)
         end
 
-        puts url
+        puts new_url
+        # puts url
         puts req
 
       end
@@ -66,15 +82,16 @@ module Bittrex
 
     private
 
-    def signature(url, nonce)
-      OpenSSL::HMAC.hexdigest('sha512', secret.encode("ASCII"), "#{url}?apikey=#{key}&nonce=#{nonce}".encode("ASCII"))
+    def signature(url)
+      OpenSSL::HMAC.hexdigest('sha512', secret, url)
+      # OpenSSL::HMAC.hexdigest('sha512', secret.encode("ASCII"), "#{url}?apikey=#{key}&nonce=#{nonce}".encode("ASCII"))
     end
 
     def connection
       @connection ||= Faraday.new(:url => HOST) do |faraday|
         faraday.request  :url_encoded
         faraday.adapter  Faraday.default_adapter
-        faraday.options.params_encoder = DoNotEncoder
+        # faraday.options.params_encoder = DoNotEncoder
       end
     end
   end
