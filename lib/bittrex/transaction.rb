@@ -15,16 +15,25 @@ module Bittrex
                                         # 1145 USD(ETH price) = 0.07162(BTC per ETH) * 16000 USD(BTC price)
 
     # https://bittrex.com/api/v1.1/market/buylimit?apikey=API_KEY&market=BTC-LTC&quantity=1.2&rate=1.3  
-    def self.buy(market_name,order_type,quantity,rate,time_in_effect,condition_type,target)
-    	# https://github.com/ericsomdahl/python-bittrex/issues/35
-      client.post('key/market/tradebuy', {
-      	MarketName: market_name, 
-      	OrderType: order_type, 
-      	Quantity: quantity,
-      	Rate: rate,
-      	TimeInEffect: time_in_effect,
-      	ConditionType: condition_type,
-      	Target: target
+    # def self.buy(market_name,order_type,quantity,rate,time_in_effect,condition_type,target)
+    # 	# https://github.com/ericsomdahl/python-bittrex/issues/35
+    #   client.post('key/market/tradebuy', {
+    #   	MarketName: market_name, 
+    #   	OrderType: order_type, 
+    #   	Quantity: quantity,
+    #   	Rate: rate,
+    #   	TimeInEffect: time_in_effect,
+    #   	ConditionType: condition_type,
+    #   	Target: target
+    #   })
+    # end
+
+    def self.buy(market_name,quantity,rate)
+      # https://github.com/ericsomdahl/python-bittrex/issues/35
+      client.post('market/buylimit', {
+        market: market_name, 
+        quantity: quantity,
+        rate: rate
       })
     end
 
@@ -45,7 +54,8 @@ module Bittrex
     private
 
     def self.client
-      Bittrex.client2
+      # Bittrex.client2
+      @client ||= Bittrex.client
     end
   end
 end
