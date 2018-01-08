@@ -29,12 +29,14 @@ module Bittrex
     #   })
     # end
 
-    def self.buy(market_name,quantity,rate)
+    def self.buy
       # https://github.com/ericsomdahl/python-bittrex/issues/35
       client.get('market/buylimit', {
-        market: market_name.to_s, 
-        quantity: quantity.to_s,
-        rate: rate.to_s
+        market: 'BTC-LTC', 
+        quantity: 0.01,
+        rate: 0.01668607
+        # ('BTC-LTC',0.01,0.01668607)
+
       })
 
       # .map{|data| new(data) }
