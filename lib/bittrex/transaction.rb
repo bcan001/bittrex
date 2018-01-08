@@ -33,10 +33,9 @@ module Bittrex
       # https://github.com/ericsomdahl/python-bittrex/issues/35
       client.get('market/buylimit', {
         market: 'BTC-LTC', 
-        quantity: 0.01,
-        rate: 0.01668607
+        quantity: 0.03,
+        rate: 0.01692523
         # ('BTC-LTC',0.01,0.01668607)
-
       })
 
       # .map{|data| new(data) }
