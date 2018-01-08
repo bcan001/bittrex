@@ -59,7 +59,7 @@ module Bittrex
 
       puts response.body
 
-      # JSON.parse(response.body)['result']
+      JSON.parse(response.body)['result']
     end
 
     # def post(path, params = {}, headers = {})
