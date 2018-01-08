@@ -18,12 +18,12 @@ module Bittrex
     def self.buy(market_name,order_type,quantity,rate,time_in_effect,condition_type,target)
     	# https://github.com/ericsomdahl/python-bittrex/issues/35
       client.get('key/market/TradeBuy', {
-      	marketName: market_name, 
-      	orderType: order_type, 
+      	marketname: market_name, 
+      	ordertype: order_type, 
       	quantity: quantity,
       	rate: rate,
-      	timeInEffect: time_in_effect,
-      	conditionType: condition_type,
+      	timeineffect: time_in_effect,
+      	conditiontype: condition_type,
       	target: target
       })
     end
