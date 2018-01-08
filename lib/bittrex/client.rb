@@ -38,6 +38,8 @@ module Bittrex
         end
       end
 
+      puts response.body
+
       JSON.parse(response.body)['result']
     end
 
