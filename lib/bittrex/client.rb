@@ -57,7 +57,7 @@ module Bittrex
         puts req
       end
 
-      puts response
+      puts response.body
 
       # JSON.parse(response.body)['result']
     end

@@ -35,7 +35,7 @@ module Bittrex
         market: market_name, 
         quantity: quantity,
         rate: rate
-      })
+      }).map{|data| new(data) }
     end
 
     def self.sell(market,quantity,rate)
