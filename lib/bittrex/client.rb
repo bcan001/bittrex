@@ -31,6 +31,9 @@ module Bittrex
         req.params.merge!(params)
         req.url(url)
 
+        puts url
+        puts req
+
         if key
           req.params[:apikey]   = key
           req.params[:nonce]    = nonce
