@@ -3,6 +3,16 @@ require 'base64'
 require 'json'
 
 module Bittrex
+  class DoNotEncoder
+    def self.encode(params)
+      buffer = ''
+      params.each do |key, value|
+        buffer << "#{key}=#{value}&"
+      end
+    return buffer.chop
+    end
+  end
+  
   class Client
     HOST = 'https://bittrex.com/api/v1.1'
     # https://bittrex.com/api/v2.0/key/balance/getbalances
@@ -64,7 +74,10 @@ module Bittrex
       @connection ||= Faraday.new(:url => HOST) do |faraday|
         faraday.request  :url_encoded
         faraday.adapter  Faraday.default_adapter
+        faraday.options.params_encoder = DoNotEncoder
       end
     end
   end
+
+
 end
