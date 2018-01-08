@@ -32,9 +32,9 @@ module Bittrex
     def self.buy(market_name,quantity,rate)
       # https://github.com/ericsomdahl/python-bittrex/issues/35
       client.get('market/buylimit', {
-        market: market_name, 
-        quantity: quantity,
-        rate: rate
+        market: market_name.to_s, 
+        quantity: quantity.to_s,
+        rate: rate.to_s
       })
 
       # .map{|data| new(data) }
