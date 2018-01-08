@@ -107,7 +107,7 @@ module Bittrex
     #   OpenSSL::HMAC.hexdigest('sha512', secret, url)
     # end
 
-    def signature_post(url, nonce)
+    def signature(url, nonce)
       # OpenSSL::HMAC.hexdigest('sha512', secret, url)
       OpenSSL::HMAC.hexdigest('sha512', secret, "#{url}?apikey=#{key}&nonce=#{nonce}")
     end
