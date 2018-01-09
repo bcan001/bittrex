@@ -28,13 +28,13 @@ module Bittrex
       nonce = Time.now.to_i
       response = connection.get do |req|
         url = "#{HOST}/#{path}"
-        req.params.merge!(params)
+        # req.params.merge!(params)
 
-        if url == 'https://bittrex.com/api/v1.1/market/buylimit'
+        # if url == 'https://bittrex.com/api/v1.1/market/buylimit'
           req.url("https://bittrex.com/api/v1.1/market/buylimit?market=BTC-LTC&quantity=0.03&rate=0.01692523&apikey=#{key}&nonce=#{nonce}")
-        else
-          req.url(url)
-        end
+        # else
+        #   req.url(url)
+        # end
 
         puts url
         puts req
@@ -123,22 +123,22 @@ module Bittrex
 
     def signature(url, nonce)
       # OpenSSL::HMAC.hexdigest('sha512', secret, url)
-      if url == 'https://bittrex.com/api/v1.1/market/buylimit'
+      # if url == 'https://bittrex.com/api/v1.1/market/buylimit'
         sig = OpenSSL::HMAC.hexdigest('sha512', secret, "#{url}?market=BTC-LTC&quantity=0.03&rate=0.01692523&apikey=#{key}&nonce=#{nonce}")
         # market: 'BTC-LTC',quantity: 0.03,rate: 0.01692523
-      else
-        sig = OpenSSL::HMAC.hexdigest('sha512', secret, "#{url}?apikey=#{key}&nonce=#{nonce}")
-      end
-      sig
+      # else
+      #   sig = OpenSSL::HMAC.hexdigest('sha512', secret, "#{url}?apikey=#{key}&nonce=#{nonce}")
+      # end
+      # sig
     end
 
-    def connection
-      @connection ||= Faraday.new(:url => HOST) do |faraday|
-        faraday.request  :url_encoded
-        faraday.adapter  Faraday.default_adapter
-        # faraday.options.params_encoder = DoNotEncoder
-      end
-    end
+    # def connection
+    #   @connection ||= Faraday.new(:url => HOST) do |faraday|
+    #     faraday.request  :url_encoded
+    #     faraday.adapter  Faraday.default_adapter
+    #     # faraday.options.params_encoder = DoNotEncoder
+    #   end
+    # end
   end
 
 
