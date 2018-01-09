@@ -132,13 +132,13 @@ module Bittrex
       # sig
     end
 
-    # def connection
-    #   @connection ||= Faraday.new(:url => HOST) do |faraday|
-    #     faraday.request  :url_encoded
-    #     faraday.adapter  Faraday.default_adapter
-    #     # faraday.options.params_encoder = DoNotEncoder
-    #   end
-    # end
+    def connection
+      @connection ||= Faraday.new(:url => HOST) do |faraday|
+        faraday.request  :url_encoded
+        faraday.adapter  Faraday.default_adapter
+        # faraday.options.params_encoder = DoNotEncoder
+      end
+    end
   end
 
 
