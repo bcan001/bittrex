@@ -35,7 +35,7 @@ module Bittrex
 
     # https://github.com/ericsomdahl/python-bittrex/issues/35
     def self.buy(market, quantity, rate)
-      client.get('market/buylimit').map{|data| new(data) }
+      client.get('market/buylimit',{market: market, quantity: quantity, rate: rate},{})
     end
 
     # def self.sell(market,quantity,rate)
