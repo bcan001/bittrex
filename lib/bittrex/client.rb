@@ -118,7 +118,13 @@ module Bittrex
 
     def signature(url, nonce)
       # OpenSSL::HMAC.hexdigest('sha512', secret, url)
-      OpenSSL::HMAC.hexdigest('sha512', secret, "#{url}?apikey=#{key}&nonce=#{nonce}")
+      if url == 'https://bittrex.com/api/v1.1/market/buylimit'
+        sig = OpenSSL::HMAC.hexdigest('sha512', secret, "#{url}?market=BTC-LTC&quantity=0.03&rate=0.01692523&apikey=#{key}&nonce=#{nonce}")
+        # market: 'BTC-LTC',quantity: 0.03,rate: 0.01692523
+      else
+        sig = OpenSSL::HMAC.hexdigest('sha512', secret, "#{url}?apikey=#{key}&nonce=#{nonce}")
+      end
+      sig
     end
 
     def connection
