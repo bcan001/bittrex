@@ -18,11 +18,7 @@ module Bittrex
       nonce = Time.now.to_i
       response = connection.get do |req|
         url = "#{HOST}/#{path}"
-        # if path == 'market/buylimit'
-        #   req.params.merge!({market: 'BTC-LTC'})
-        # else
-        #   req.params.merge!(params)
-        # end
+
         req.params.merge!(params)
         req.url(url)
 
@@ -47,9 +43,6 @@ module Bittrex
 
     private
 
-    # def signature_post(url, nonce)
-    #   OpenSSL::HMAC.hexdigest('sha512', secret, url)
-    # end
 
     def signature(url, nonce)
       OpenSSL::HMAC.hexdigest('sha512', secret, "#{url}?apikey=#{key}&nonce=#{nonce}")
