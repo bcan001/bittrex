@@ -50,26 +50,26 @@ module Bittrex
       JSON.parse(response.body)['result']
     end
 
-    def post(path, params = {}, headers = {})
-      nonce = Time.now.to_i
-      response = connection.post do |req|
-        url = "#{HOST}/#{path}"
-        req.params.merge!(params)
-        req.url(url)
+    # def post(path, params = {}, headers = {})
+    #   nonce = Time.now.to_i
+    #   response = connection.post do |req|
+    #     url = "#{HOST}/#{path}"
+    #     req.params.merge!(params)
+    #     req.url(url)
 
-        if key
-          req.params[:apikey]   = key
-          req.params[:nonce]    = nonce
-          req.headers[:apisign] = signature(url, nonce)
-        end
+    #     if key
+    #       req.params[:apikey]   = key
+    #       req.params[:nonce]    = nonce
+    #       req.headers[:apisign] = signature(url, nonce)
+    #     end
 
-        puts req
-      end
+    #     puts req
+    #   end
 
-      puts response.body
+    #   puts response.body
 
-      JSON.parse(response.body)['result']
-    end
+    #   JSON.parse(response.body)['result']
+    # end
 
     # def post(path, params = {}, headers = {})
     #   nonce = Time.now.to_i
