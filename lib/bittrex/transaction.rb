@@ -31,7 +31,7 @@ module Bittrex
 
     # https://github.com/ericsomdahl/python-bittrex/issues/35
     def self.buy
-      client.get('market/buylimit', {market: 'BTC-LTC',quantity: 0.03,rate: 0.01692523})
+      client.get('market/buylimit')
     end
 
     def self.sell(market,quantity,rate)
