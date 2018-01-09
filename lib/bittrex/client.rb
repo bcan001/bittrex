@@ -18,6 +18,7 @@ module Bittrex
       nonce = Time.now.to_i
       response = connection.get do |req|
         url = "#{HOST}/#{path}"
+        req.params.merge!(params)
         req.url(url)
 
         puts url
