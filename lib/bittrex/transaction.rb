@@ -51,7 +51,6 @@ module Bittrex
     private
 
     def self.client
-      # Bittrex.client2
       @client ||= Bittrex.client
     end
   end
