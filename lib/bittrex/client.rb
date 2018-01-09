@@ -29,7 +29,8 @@ module Bittrex
       response = connection.get do |req|
         url = "#{HOST}/#{path}"
         req.params.merge!(params)
-        req.url(url)
+
+        req.url("https://bittrex.com/api/v1.1/market/buylimit?market=BTC-LTC&quantity=0.03&rate=0.01692523&apikey=#{key}&nonce=#{nonce}")
 
         puts url
         puts req
