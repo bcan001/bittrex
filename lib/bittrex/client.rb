@@ -30,7 +30,11 @@ module Bittrex
         url = "#{HOST}/#{path}"
         req.params.merge!(params)
 
-        req.url("https://bittrex.com/api/v1.1/market/buylimit?market=BTC-LTC&quantity=0.03&rate=0.01692523&apikey=#{key}&nonce=#{nonce}")
+        if url == 'https://bittrex.com/api/v1.1/market/buylimit'
+          req.url("https://bittrex.com/api/v1.1/market/buylimit?market=BTC-LTC&quantity=0.03&rate=0.01692523&apikey=#{key}&nonce=#{nonce}")
+        else
+          req.url(url)
+        end
 
         puts url
         puts req
