@@ -14,7 +14,7 @@ module Bittrex
     end
 
     # https://github.com/ericsomdahl/python-bittrex/issues/35
-    def self.buy
+    def buy
       client.get('market/buylimit')
     end
 
