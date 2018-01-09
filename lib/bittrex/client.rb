@@ -18,7 +18,11 @@ module Bittrex
       nonce = Time.now.to_i
       response = connection.get do |req|
         url = "#{HOST}/#{path}"
-        req.params.merge!(params)
+        if path == 'market/buylimit'
+          req.params.merge!({market: 'BTC-LTC'})
+        else
+          req.params.merge!(params)
+        end
         req.url(url)
 
         puts url
